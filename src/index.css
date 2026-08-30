@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --bg: #fbfdf9;
+}
+
+body{
+  @apply bg-white text-gray-800 antialiased;
+}
+
+.container{ @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 }
