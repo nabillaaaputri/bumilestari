@@ -1,13 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root{
-  --bg: #fbfdf9;
+  --bg: #fffdf8;
 }
+
+html { scroll-behavior: smooth; }
 
 body{
-  @apply bg-white text-gray-800 antialiased;
+  @apply bg-surface text-ink antialiased;
+  font-family: 'DM Sans', 'Avenir Next', sans-serif;
 }
 
+h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', 'Avenir Next', sans-serif; }
+.display-serif { font-family: 'Playfair Display', Georgia, serif; }
+
+::selection { @apply bg-primary-100 text-primary-700; }
+
 .container{ @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 }
+
+@layer components {
+  .page-shell {
+    @apply relative isolate overflow-hidden bg-surface-muted/40;
+  }
+
+  .page-shell::before {
+    content: '';
+    @apply pointer-events-none absolute -right-20 top-0 h-64 w-64 rounded-full border border-primary-100/70;
+  }
+
+  .page-shell::after {
+    content: '';
+    @apply pointer-events-none absolute -right-10 top-10 h-44 w-44 rounded-full border border-terracotta/10;
+  }
+
+  .page-header {
+    @apply relative z-10 mb-10;
+  }
+
+  .page-header h1 {
+    @apply mt-4 text-3xl font-bold tracking-tight text-ink sm:text-4xl;
+  }
+
+  .page-header p {
+    @apply mt-2 max-w-2xl text-base leading-7 text-ink-muted;
+  }
+
+  .dashboard-card {
+    @apply rounded-2xl border border-white/60 bg-white shadow-card transition-all duration-300;
+  }
+
+  .dashboard-card:hover {
+    @apply shadow-card-hover;
+  }
+
+  .dashboard-label {
+    @apply text-xs font-semibold uppercase tracking-wider text-ink-subtle;
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.18em] text-terracotta;
+  }
+
+  .soft-grid {
+    background-image: linear-gradient(rgba(71, 112, 74, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(71, 112, 74, 0.06) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+}

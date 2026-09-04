@@ -286,7 +286,9 @@ export const EMISSION_FACTORS = {
  * @returns {object|null} - Emission factor object atau null jika tidak ditemukan
  */
 export const getEmissionFactor = (factorId) => {
-  return EMISSION_FACTORS[factorId] || null
+  if (!factorId) return null
+  if (EMISSION_FACTORS[factorId]) return EMISSION_FACTORS[factorId]
+  return Object.values(EMISSION_FACTORS).find((factor) => factor.id === factorId) || null
 }
 
 /**

@@ -5,8 +5,29 @@
 
 import React, { useMemo } from 'react'
 import { TrendingUp, AlertCircle, Zap } from 'lucide-react'
-import { getCategoryLabel, getCategoryIcon } from '../../utils/activityHelpers'
+import { getCategoryLabel } from '../../utils/activityHelpers'
 import { getTopEmitters, calculateTotalEmission } from '../../utils/carbonCalculator'
+
+const insightStyles = {
+  'top-contributor': {
+    icon: AlertCircle,
+    accent: 'amber',
+    iconBg: 'bg-gradient-to-br from-amber-50 to-orange-100 text-amber-700',
+    ring: 'ring-amber-100/80',
+  },
+  'daily-average': {
+    icon: Zap,
+    accent: 'blue',
+    iconBg: 'bg-gradient-to-br from-sky-50 to-blue-100 text-sky-700',
+    ring: 'ring-sky-100/80',
+  },
+  'category-count': {
+    icon: TrendingUp,
+    accent: 'emerald',
+    iconBg: 'bg-gradient-to-br from-emerald-50 to-green-100 text-emerald-700',
+    ring: 'ring-emerald-100/80',
+  },
+}
 
 export default function InsightCard({ activities = [] }) {
   const insights = useMemo(() => {
@@ -16,9 +37,7 @@ export default function InsightCard({ activities = [] }) {
     const topEmitters = getTopEmitters(activities, 3)
     const totalEmission = calculateTotalEmission(activities)
 
-    // Insight 1: Top contributor
     if (topEmitters.length > 0) {
-      const topCategory = topEmitters[0].category
       const topEmission = topEmitters[0].carbonEmission
       const percentage = ((topEmission / totalEmission) * 100).toFixed(1)
 
@@ -26,26 +45,17 @@ export default function InsightCard({ activities = [] }) {
         type: 'top-contributor',
         title: 'Kontributor Terbesar',
         description: `${topEmitters[0].activity} berkontribusi ${percentage}% dari total emisimu`,
-        icon: AlertCircle,
-        color: 'text-amber-600',
-        bgColor: 'bg-amber-50',
       })
     }
 
-    // Insight 2: Daily average
-    const dailyAverage = Math.round(
-      (totalEmission / (activities.length || 1)) * 100
-    ) / 100
+    const dailyAverage =
+      Math.round((totalEmission / (activities.length || 1)) * 100) / 100
     result.push({
       type: 'daily-average',
       title: 'Rata-rata per Aktivitas',
       description: `Setiap aktivitas merata-rata menghasilkan ${dailyAverage} kg CO₂e`,
-      icon: Zap,
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-50',
     })
 
-    // Insight 3: Category breakdown
     const categoryCount = {}
     activities.forEach((act) => {
       categoryCount[act.category] = (categoryCount[act.category] || 0) + 1
@@ -56,9 +66,6 @@ export default function InsightCard({ activities = [] }) {
         type: 'category-count',
         title: `Kategori "${getCategoryLabel(topCategory[0])}" Terbanyak`,
         description: `Kamu memiliki ${topCategory[1]} aktivitas di kategori ini`,
-        icon: TrendingUp,
-        color: 'text-green-600',
-        bgColor: 'bg-green-50',
       })
     }
 
@@ -71,19 +78,17 @@ export default function InsightCard({ activities = [] }) {
 
   return (
     <div>
-      <h3 className="text-lg font-semibold text-gray-800 mb-4">Insight</h3>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="border-t border-primary-600">
         {insights.map((insight, idx) => {
-          const Icon = insight.icon
+          const style = insightStyles[insight.type] || insightStyles['category-count']
+          const Icon = style.icon
           return (
-            <div key={idx} className={`p-4 rounded-lg border ${insight.bgColor}`}>
+            <div key={idx} className="border-b border-primary-100 py-5">
               <div className="flex items-start gap-3">
-                <div className={`p-2 rounded-lg ${insight.bgColor}`}>
-                  <Icon size={20} className={insight.color} />
-                </div>
-                <div className="flex-1">
-                  <p className={`text-sm font-medium ${insight.color}`}>{insight.title}</p>
-                  <p className="text-sm text-gray-700 mt-1">{insight.description}</p>
+                <Icon size={18} strokeWidth={1.8} className="mt-0.5 shrink-0 text-terracotta" />
+                <div className="min-w-0 flex-1">
+                  <p className="text-base font-semibold text-ink">{insight.title}</p>
+                  <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-ink-muted">{insight.description}</p>
                 </div>
               </div>
             </div>

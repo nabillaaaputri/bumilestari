@@ -7,7 +7,7 @@ import ActivityForm from '../components/activity/ActivityForm'
 import { useActivityStore } from '../store/activityStore'
 import SectionTitle from '../components/SectionTitle'
 import { calculateCarbonEmission } from '../utils/carbonCalculator'
-import { EMISSION_FACTORS } from '../constants/emissionFactors'
+import { getEmissionFactor } from '../constants/emissionFactors'
 
 export default function Aktivitas() {
   const [isFormOpen, setIsFormOpen] = useState(false)
@@ -43,7 +43,9 @@ export default function Aktivitas() {
   const handleSubmitForm = (formData) => {
     if (editingActivity) {
       // Update existing activity dengan recalculate carbon emission
-      const factor = EMISSION_FACTORS[formData.emissionFactorId]
+      const factor = getEmissionFactor(formData.emissionFactorId)
+      if (!factor) return
+
       const newCarbonEmission = calculateCarbonEmission(
         Number(formData.amount),
         factor.emissionFactor
@@ -69,19 +71,21 @@ export default function Aktivitas() {
   const hasActivities = activities.length > 0
 
   return (
-    <div className="container py-12">
+    <div className="page-shell">
+      <div className="container relative z-10 py-12">
       {/* Header */}
-      <div className="mb-8">
+      <div className="page-header">
         <div className="flex items-start justify-between mb-3">
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Aktivitas</h1>
-            <p className="mt-2 text-gray-600">
-              Catat aktivitas sehari-hari kamu dan lihat perkiraan emisi karbon yang dihasilkan.
+            <p className="eyebrow">Personal activity journal</p>
+            <h1 className="display-serif !mt-3 !text-5xl !leading-none sm:!text-7xl">Catat kebiasaanmu.</h1>
+            <p>
+              Pahami dampak dari aktivitas sehari-hari dan temukan pola yang bisa kamu ubah perlahan.
             </p>
           </div>
           <button
             onClick={handleOpenForm}
-            className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700 font-medium transition-colors"
+            className="hidden sm:flex items-center gap-2 rounded-full bg-primary-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-700"
           >
             <Plus size={20} />
             Tambah Aktivitas
@@ -91,7 +95,7 @@ export default function Aktivitas() {
         {/* Mobile Button */}
         <button
           onClick={handleOpenForm}
-          className="sm:hidden w-full flex items-center justify-center gap-2 px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700 font-medium transition-colors"
+          className="sm:hidden w-full flex items-center justify-center gap-2 rounded-full bg-primary-600 px-4 py-3 text-sm font-semibold text-white hover:bg-primary-700"
         >
           <Plus size={20} />
           Tambah Aktivitas
@@ -125,7 +129,7 @@ export default function Aktivitas() {
           <div className="text-center py-16 px-6">
             <div className="inline-block p-4 rounded-full bg-green-50 mb-4">
               <svg
-                className="w-12 h-12 text-green-600"
+                className="w-12 h-12 text-primary-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -138,15 +142,15 @@ export default function Aktivitas() {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            <h3 className="text-xl font-semibold text-ink mb-2">
               Belum ada aktivitas
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-ink-muted mb-6">
               Mulai catat aktivitas kamu hari ini untuk melihat jejak karbon dari kebiasaan sehari-hari.
             </p>
             <button
               onClick={handleOpenForm}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-green-600 text-white hover:bg-green-700 font-medium transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-primary-600 text-white hover:bg-primary-700 font-medium transition-colors"
             >
               <Plus size={20} />
               Tambah Aktivitas Pertama
@@ -162,6 +166,7 @@ export default function Aktivitas() {
         onSubmit={handleSubmitForm}
         editingActivity={editingActivity}
       />
+      </div>
     </div>
   )
 }

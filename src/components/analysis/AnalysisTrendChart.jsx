@@ -10,7 +10,7 @@ import { calculateDailyEmission, getTopEmitters } from '../../utils/carbonCalcul
 export default function AnalysisTrendChart({ activities = [] }) {
   if (!activities || activities.length === 0) {
     return (
-      <div className="p-6 rounded-lg border bg-white h-96 flex items-center justify-center">
+      <div className="h-96 flex items-center justify-center border-t border-primary-600">
         <div className="text-center">
           <p className="text-gray-600">Belum ada data untuk ditampilkan</p>
           <p className="text-sm text-gray-500 mt-1">Mulai catat aktivitas untuk melihat trend</p>
@@ -22,7 +22,7 @@ export default function AnalysisTrendChart({ activities = [] }) {
   const dailyData = calculateDailyEmission(activities)
   if (dailyData.length === 0) {
     return (
-      <div className="p-6 rounded-lg border bg-white h-96 flex items-center justify-center">
+      <div className="h-96 flex items-center justify-center border-t border-primary-600">
         <div className="text-center">
           <p className="text-gray-600">Belum ada data untuk periode ini</p>
         </div>
@@ -42,9 +42,9 @@ export default function AnalysisTrendChart({ activities = [] }) {
   }))
 
   return (
-    <div className="p-6 rounded-lg border bg-white">
-      <h3 className="text-lg font-semibold text-gray-800 mb-4">Trend Emisi Harian</h3>
-      <ResponsiveContainer width="100%" height={300}>
+    <div className="border-t border-primary-600 pt-5">
+      <h3 className="text-lg font-semibold text-ink mb-4">Trend Emisi Harian</h3>
+      <ResponsiveContainer width="100%" height={340}>
         <LineChart data={formattedData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
           <XAxis 

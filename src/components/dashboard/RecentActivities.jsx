@@ -11,24 +11,25 @@ import {
   getCategoryIcon,
   getCategoryLabel,
   formatCarbonEmission,
+  getCategoryColor,
 } from '../../utils/activityHelpers'
 
 export default function RecentActivities({ activities = [] }) {
-  // Get 5 most recent activities
   const recentActivities = activities
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 5)
 
   if (recentActivities.length === 0) {
     return (
-      <div className="p-6 rounded-lg border bg-white">
-        <h3 className="text-lg font-semibold text-gray-800 mb-4">Aktivitas Terbaru</h3>
-        <div className="py-8 text-center">
-          <p className="text-gray-600">Belum ada aktivitas</p>
-          <p className="text-sm text-gray-500 mt-1">Mulai catat aktivitas Anda sekarang</p>
+      <div className="dashboard-card p-6">
+        <p className="dashboard-label">Aktivitas</p>
+        <h3 className="mt-1 text-lg font-semibold tracking-tight text-ink">Aktivitas Terbaru</h3>
+        <div className="py-10 text-center">
+          <p className="font-medium text-ink-muted">Belum ada aktivitas</p>
+          <p className="mt-1 text-sm text-ink-subtle">Mulai catat aktivitas Anda sekarang</p>
           <Link
             to="/aktivitas"
-            className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-green-600 text-white hover:bg-green-700 font-medium transition-colors text-sm"
+            className="mt-5 inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-emerald-700"
           >
             Tambah Aktivitas
             <ArrowRight size={16} />
@@ -39,29 +40,40 @@ export default function RecentActivities({ activities = [] }) {
   }
 
   return (
-    <div className="p-6 rounded-lg border bg-white">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-800">Aktivitas Terbaru</h3>
-        <Link to="/aktivitas" className="text-green-600 hover:text-green-700 text-sm font-medium flex items-center gap-1">
+    <div className="border-t border-primary-600">
+      <div className="mb-3 flex items-start justify-between gap-4 pt-5">
+        <div>
+          <p className="dashboard-label">Aktivitas</p>
+          <h3 className="mt-1 text-lg font-semibold tracking-tight text-ink">Aktivitas Terbaru</h3>
+        </div>
+        <Link
+          to="/aktivitas"
+          className="inline-flex items-center gap-1 text-xs font-medium text-primary-700 transition-colors hover:text-primary-500"
+        >
           Lihat Semua
-          <ArrowRight size={16} />
+          <ArrowRight size={14} />
         </Link>
       </div>
 
-      <div className="space-y-3">
+      <div className="divide-y divide-primary-100">
         {recentActivities.map((activity) => (
-          <div key={activity.id} className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition-colors">
-            <div className="flex items-center gap-3 flex-1">
-              <span className="text-xl">{getCategoryIcon(activity.category)}</span>
+          <div
+            key={activity.id}
+            className="flex items-center justify-between gap-4 py-4 transition-colors hover:bg-primary-50/60"
+          >
+            <div className="flex min-w-0 flex-1 items-center gap-3">
+              <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center text-base" style={{ color: getCategoryColor(activity.category) }}>
+                {getCategoryIcon(activity.category)}
+              </div>
               <div className="min-w-0">
-                <p className="text-sm font-medium text-gray-800 truncate">{activity.activity}</p>
-                <p className="text-xs text-gray-600">
+                <p className="truncate text-sm font-medium text-ink">{activity.activity}</p>
+                <p className="text-xs text-ink-subtle">
                   {getCategoryLabel(activity.category)} · {formatDateShort(activity.date)}
                 </p>
               </div>
             </div>
-            <div className="text-right flex-shrink-0">
-              <p className="text-sm font-semibold text-green-700">
+            <div className="flex-shrink-0 text-right">
+              <p className="text-sm font-semibold text-emerald-700">
                 {formatCarbonEmission(activity.carbonEmission, 1)}
               </p>
             </div>
@@ -69,10 +81,7 @@ export default function RecentActivities({ activities = [] }) {
         ))}
       </div>
 
-      <Link
-        to="/aktivitas"
-        className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-2 rounded-md border border-green-200 text-green-600 hover:bg-green-50 font-medium transition-colors text-sm"
-      >
+      <Link to="/aktivitas" className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary-700 transition-colors hover:text-primary-500">
         Lihat Semua Aktivitas
         <ArrowRight size={16} />
       </Link>

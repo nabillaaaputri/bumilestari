@@ -25,14 +25,14 @@ export default function ActivityCard({ activity, onEdit, onDelete }) {
   }
 
   return (
-    <div className="p-4 rounded-lg border bg-white hover:shadow-md transition-shadow">
+    <div className="group border-t border-primary-100 py-5 transition-colors hover:bg-primary-50/50 sm:px-2">
       {/* Header: Date & Category */}
-      <div className="flex items-start justify-between mb-3">
+      <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-2">
-          <span className="text-lg">{getCategoryIcon(activity.category)}</span>
+          <span className="text-base" style={{ color: getCategoryColor(activity.category) }}>{getCategoryIcon(activity.category)}</span>
           <div>
-            <p className="text-xs text-gray-500">{formatDateShort(activity.date)}</p>
-            <p className="text-sm font-medium text-gray-800">
+            <p className="text-xs text-ink-subtle">{formatDateShort(activity.date)}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-primary-700">
               {getCategoryLabel(activity.category)}
             </p>
           </div>
@@ -40,14 +40,14 @@ export default function ActivityCard({ activity, onEdit, onDelete }) {
         <div className="flex gap-2">
           <button
             onClick={() => onEdit(activity)}
-            className="p-2 rounded-md hover:bg-blue-50 text-blue-600 transition-colors"
+            className="p-2 text-primary-600 opacity-60 transition-colors hover:bg-primary-50 hover:opacity-100"
             title="Edit aktivitas"
           >
             <Edit2 size={18} />
           </button>
           <button
             onClick={handleDelete}
-            className="p-2 rounded-md hover:bg-red-50 text-red-600 transition-colors"
+            className="p-2 text-terracotta opacity-60 transition-colors hover:bg-terracotta-light hover:opacity-100"
             title="Hapus aktivitas"
           >
             <Trash2 size={18} />
@@ -56,19 +56,19 @@ export default function ActivityCard({ activity, onEdit, onDelete }) {
       </div>
 
       {/* Activity Details */}
-      <p className="text-sm font-medium text-gray-700 mb-2">{activity.activity}</p>
+      <p className="mt-4 text-base font-semibold text-ink">{activity.activity}</p>
 
       {/* Amount & Emission */}
-      <div className="flex items-baseline gap-4">
+      <div className="mt-3 flex items-baseline justify-between gap-4">
         <div>
-          <p className="text-xs text-gray-500">Jumlah</p>
-          <p className="text-lg font-semibold text-gray-800">
+          <p className="text-xs text-ink-subtle">Jumlah</p>
+          <p className="text-base font-semibold text-ink">
             {activity.amount} <span className="text-sm text-gray-600">{activity.unit}</span>
           </p>
         </div>
         <div>
-          <p className="text-xs text-gray-500">Emisi Karbon</p>
-          <p className="text-lg font-semibold" style={{ color: getCategoryColor(activity.category) }}>
+          <p className="text-xs text-ink-subtle">Emisi Karbon</p>
+          <p className="text-base font-semibold" style={{ color: getCategoryColor(activity.category) }}>
             {formatCarbonEmission(activity.carbonEmission)}
           </p>
         </div>
@@ -76,7 +76,7 @@ export default function ActivityCard({ activity, onEdit, onDelete }) {
 
       {/* Notes */}
       {activity.notes && (
-        <p className="mt-3 text-xs text-gray-600 italic">💬 {activity.notes}</p>
+        <p className="mt-3 text-xs text-ink-muted italic">{activity.notes}</p>
       )}
     </div>
   )

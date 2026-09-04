@@ -25,21 +25,23 @@ export default function Analisis() {
   const hasPeriodData = filteredActivities.length > 0
 
   return (
-    <div className="container py-12">
+    <div className="page-shell">
+      <div className="container relative z-10 py-12">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">Analisis Emisi</h1>
-        <p className="mt-2 text-gray-600">
-          Kenali pola emisi karbonmu dan temukan sumber emisi terbesar.
+      <div className="page-header">
+        <p className="eyebrow">Environmental intelligence</p>
+        <h1 className="display-serif !mt-3 !text-5xl !leading-none sm:!text-7xl">Lihat polanya.</h1>
+        <p>
+          Baca bagaimana jejak karbonmu terbentuk dan temukan arah perubahan berikutnya.
         </p>
       </div>
 
       {/* Empty State - No Activities */}
       {!hasActivities ? (
         <div className="text-center py-16 px-6">
-          <div className="inline-block p-4 rounded-full bg-green-50 mb-4">
+            <div className="inline-block p-4 rounded-full bg-primary-50 mb-4">
             <svg
-              className="w-12 h-12 text-green-600"
+              className="w-12 h-12 text-primary-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -52,13 +54,13 @@ export default function Analisis() {
               />
             </svg>
           </div>
-          <h2 className="text-2xl font-semibold text-gray-800 mb-2">Belum ada data untuk dianalisis</h2>
-          <p className="text-gray-600 mb-6 max-w-md mx-auto">
+          <h2 className="text-2xl font-semibold text-ink mb-2">Belum ada data untuk dianalisis</h2>
+          <p className="text-ink-muted mb-6 max-w-md mx-auto">
             Mulai catat aktivitas kamu untuk melihat analisis mendalam tentang pola dan sumber emisi karbonmu.
           </p>
           <Link
             to="/aktivitas"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-green-600 text-white hover:bg-green-700 font-medium transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-primary-600 text-white hover:bg-primary-700 font-medium transition-colors"
           >
             <Activity size={20} />
             Tambah Aktivitas
@@ -73,7 +75,7 @@ export default function Analisis() {
               selectedPeriod={selectedPeriod} 
               onPeriodChange={setSelectedPeriod}
             />
-            <p className="mt-3 text-sm text-gray-600">
+            <p className="mt-4 border-l-2 border-terracotta pl-3 text-sm text-ink-muted">
               Menampilkan data: <span className="font-medium">{formatPeriodRange(selectedPeriod)}</span>
             </p>
           </div>
@@ -81,8 +83,8 @@ export default function Analisis() {
           {/* Empty State - No Data for Period */}
           {!hasPeriodData ? (
             <div className="text-center py-16 px-6 rounded-lg border bg-white">
-              <p className="text-gray-600 text-lg">Tidak ada data untuk periode ini</p>
-              <p className="text-sm text-gray-500 mt-2">Coba pilih periode yang lain atau tambahkan lebih banyak aktivitas.</p>
+              <p className="text-ink-muted text-lg">Tidak ada data untuk periode ini</p>
+              <p className="text-sm text-ink-subtle mt-2">Coba pilih periode yang lain atau tambahkan lebih banyak aktivitas.</p>
             </div>
           ) : (
             <>
@@ -128,6 +130,7 @@ export default function Analisis() {
           )}
         </>
       )}
+      </div>
     </div>
   )
 }

@@ -2,11 +2,10 @@ import React from 'react'
 
 export default function Footer(){
   return (
-    <footer className="bg-white border-t">
-      <div className="container py-8 text-center text-sm text-gray-600">
-        <div className="font-semibold text-gray-800">BumiLestari</div>
-        <div className="mt-1">Aplikasi sederhana untuk membantu kamu memahami perkiraan jejak karbon sehari-hari.</div>
-        <div className="mt-3">© {new Date().getFullYear()} BumiLestari</div>
+    <footer className="border-t border-primary-100 bg-primary-700 text-primary-50">
+      <div className="container flex flex-col gap-3 py-8 text-sm sm:flex-row sm:items-center sm:justify-between">
+        <div><div className="font-bold text-white">BumiLestari</div><div className="mt-1 text-primary-100">Kenali jejakmu. Jaga bumi.</div></div>
+        <div className="text-primary-100">© {new Date().getFullYear()} BumiLestari</div>
       </div>
     </footer>
   )

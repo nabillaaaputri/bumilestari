@@ -14,15 +14,15 @@ export default function AnalysisPeriodSelector({ selectedPeriod, onPeriodChange 
   ]
 
   return (
-    <div className="flex gap-3 flex-wrap">
+    <div className="flex flex-wrap gap-2 border-b border-primary-100 pb-3">
       {periods.map((period) => (
         <button
           key={period.value}
           onClick={() => onPeriodChange(period.value)}
-          className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+          className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
             selectedPeriod === period.value
-              ? 'bg-green-600 text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              ? 'bg-primary-600 text-white'
+              : 'bg-primary-50 text-ink-muted hover:bg-primary-100'
           }`}
         >
           {period.label}

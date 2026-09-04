@@ -6,8 +6,8 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { X, AlertCircle } from 'lucide-react'
 import {
-  EMISSION_FACTORS,
   ACTIVITY_CATEGORIES,
+  getEmissionFactor,
   getEmissionFactorsByCategory,
 } from '../../constants/emissionFactors'
 import { calculateCarbonEmission } from '../../utils/carbonCalculator'
@@ -63,7 +63,7 @@ export default function ActivityForm({ isOpen, onClose, onSubmit, editingActivit
   // Calculate emission realtime
   useEffect(() => {
     if (formData.amount && selectedFactorId) {
-      const factor = EMISSION_FACTORS[selectedFactorId]
+      const factor = getEmissionFactor(selectedFactorId)
       if (factor) {
         const emission = calculateCarbonEmission(
           Number(formData.amount),
@@ -90,7 +90,8 @@ export default function ActivityForm({ isOpen, onClose, onSubmit, editingActivit
 
   const handleActivityChange = (e) => {
     const emissionFactorId = e.target.value
-    const factor = EMISSION_FACTORS[emissionFactorId]
+    const factor = getEmissionFactor(emissionFactorId)
+    if (!factor) return
 
     setFormData({
       ...formData,
@@ -240,7 +241,7 @@ export default function ActivityForm({ isOpen, onClose, onSubmit, editingActivit
               </select>
               {formData.emissionFactorId && (
                 <p className="mt-1 text-xs text-gray-600">
-                  {EMISSION_FACTORS[formData.emissionFactorId]?.description}
+                  {getEmissionFactor(formData.emissionFactorId)?.description}
                 </p>
               )}
             </div>

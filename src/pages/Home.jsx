@@ -1,83 +1,38 @@
 import React from 'react'
-import { Leaf, BarChart2, Lightbulb, List, Calculator, TrendingUp } from 'lucide-react'
+import { ArrowDownRight, ArrowRight, ChevronRight, Leaf, MoveUpRight, Sparkles, TrendingDown, Waves } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import Button from '../components/Button'
-import SectionTitle from '../components/SectionTitle'
 
-export default function Home(){
+const impactAreas = [
+  { number: '01', title: 'Transport', detail: 'Perjalanan sehari-hari', className: 'md:col-span-2 md:row-span-2 bg-[#dfe8d7] hover:bg-[#d4dfc9]', image: 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?auto=format&fit=crop&w=1000&q=85' },
+  { number: '02', title: 'Energy', detail: 'Listrik dan rumah', className: 'bg-[#efe5d5] hover:bg-[#e9dcc8]' },
+  { number: '03', title: 'Food', detail: 'Pilihan di meja makan', className: 'bg-[#eadbd2] hover:bg-[#e4d0c5]' },
+  { number: '04', title: 'Lifestyle', detail: 'Belanja dan kebiasaan', className: 'md:col-span-2 bg-primary-700 text-white hover:bg-[#365d40]' },
+]
+
+const steps = [
+  { number: '01', title: 'Understand', text: 'Kenali pola aktivitasmu tanpa menghakimi.' },
+  { number: '02', title: 'Track', text: 'Pantau perubahan kecil dari waktu ke waktu.' },
+  { number: '03', title: 'Improve', text: 'Pilih rekomendasi yang masuk akal untukmu.' },
+]
+
+export default function Home() {
   return (
-    <div className="py-12">
-      <section className="container grid gap-12 lg:grid-cols-2 items-center">
-        <div>
-          <h1 className="text-4xl font-bold text-gray-800">BumiLestari</h1>
-          <p className="mt-4 text-xl text-gray-600">Kenali jejakmu. Kurangi dampaknya.</p>
-          <p className="mt-4 text-gray-600">BumiLestari membantu kamu menghitung dan memahami perkiraan jejak karbon dari aktivitas sehari-hari.</p>
-          <div className="mt-6">
-            <Button to="/dashboard">Mulai Hitung Jejak Karbon</Button>
-          </div>
-        </div>
-
-        <div className="flex justify-center">
-          <div className="w-64 h-64 bg-green-50 rounded-2xl flex items-center justify-center shadow-sm">
-            <Leaf className="text-green-600" size={80} />
-          </div>
+    <div className="overflow-hidden">
+      <section className="relative min-h-[700px] bg-primary-700 text-white sm:min-h-[760px]">
+        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2200&q=90" alt="Lembah hijau berkabut" className="absolute inset-0 h-full w-full object-cover object-[center_42%] opacity-65" />
+        <div className="absolute inset-0 bg-black/35" />
+        <div className="container relative flex min-h-[700px] flex-col justify-between py-9 sm:min-h-[760px] sm:py-12">
+          <div className="flex items-center justify-between"><span className="eyebrow !text-[#e6c3a7]">Personal sustainability, made human</span><span className="hidden items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-white/70 sm:flex"><span className="h-2 w-2 rounded-full bg-[#e6c3a7]" /> BumiLestari / 01</span></div>
+          <div className="relative pb-8 sm:pb-14"><div className="max-w-4xl"><h1 className="display-serif text-5xl leading-[0.92] tracking-[-0.035em] sm:text-8xl lg:text-[9rem]">Kenali jejakmu.<br /><span className="ml-[8%] text-[#dbe8d2] sm:ml-[18%]">Jaga bumi.</span></h1><p className="mt-7 max-w-md text-base leading-7 text-white/80 sm:ml-[18%] sm:mt-8 sm:text-lg">BumiLestari membantu kamu memahami dampak dari kebiasaan sehari-hari dan menemukan langkah sederhana untuk hidup lebih berkelanjutan.</p><div className="mt-7 flex flex-wrap items-center gap-4 sm:ml-[18%] sm:mt-8"><Button to="/dashboard" className="border border-white/20 bg-[#e6c3a7] text-primary-700 hover:bg-white">Hitung Jejak Karbon <ArrowRight size={17} /></Button><a href="#jelajahi" className="inline-flex items-center gap-2 px-2 py-3 text-sm font-semibold text-white hover:text-[#e6c3a7]">Jelajahi BumiLestari <ArrowDownRight size={16} /></a></div></div><div className="mt-8 w-48 border-l border-white/30 pl-5 text-white/80 sm:absolute sm:bottom-0 sm:right-0 sm:mt-0"><p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/55">Your footprint</p><p className="display-serif mt-1 text-4xl text-white">2.4 t <span className="font-sans text-sm text-white/60">CO₂e</span></p><p className="mt-1 text-xs font-semibold text-[#dbe8d2]">↓ 12% this month</p></div></div>
         </div>
       </section>
-
-      <section className="container mt-16">
-        <SectionTitle title="Manfaat BumiLestari" subtitle="Apa yang bisa kamu dapatkan" />
-        <div className="grid gap-6 sm:grid-cols-3">
-          <div className="p-5 border rounded-lg hover:shadow-md">
-            <div className="flex items-center gap-3 text-green-600"><BarChart2 /></div>
-            <h3 className="mt-3 font-semibold">Hitung Jejak Karbon</h3>
-            <p className="text-gray-600 mt-2 text-sm">Catat aktivitas sehari-hari dan lihat perkiraan emisi yang dihasilkan.</p>
-          </div>
-
-          <div className="p-5 border rounded-lg hover:shadow-md">
-            <div className="flex items-center gap-3 text-green-600"><TrendingUp /></div>
-            <h3 className="mt-3 font-semibold">Pantau Perkembangan</h3>
-            <p className="text-gray-600 mt-2 text-sm">Lihat perubahan jejak karbonmu dari waktu ke waktu.</p>
-          </div>
-
-          <div className="p-5 border rounded-lg hover:shadow-md">
-            <div className="flex items-center gap-3 text-green-600"><Lightbulb /></div>
-            <h3 className="mt-3 font-semibold">Temukan Kebiasaan Lebih Baik</h3>
-            <p className="text-gray-600 mt-2 text-sm">Dapatkan insight untuk memahami aktivitas yang paling berpengaruh terhadap jejak karbonmu.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="container mt-16">
-        <SectionTitle title="Cara Kerja" />
-        <div className="grid gap-6 sm:grid-cols-3">
-          <div className="p-6 border rounded-lg text-center">
-            <div className="text-2xl font-bold text-green-700">01</div>
-            <div className="mt-3 text-lg font-semibold">Catat Aktivitas</div>
-            <p className="text-gray-600 mt-2 text-sm">Masukkan aktivitas sehari-hari seperti transportasi, penggunaan energi, dan makanan.</p>
-          </div>
-
-          <div className="p-6 border rounded-lg text-center">
-            <div className="text-2xl font-bold text-green-700">02</div>
-            <div className="mt-3 text-lg font-semibold">Hitung Emisi</div>
-            <p className="text-gray-600 mt-2 text-sm">Sistem menghitung perkiraan emisi berdasarkan aktivitas yang kamu catat.</p>
-          </div>
-
-          <div className="p-6 border rounded-lg text-center">
-            <div className="text-2xl font-bold text-green-700">03</div>
-            <div className="mt-3 text-lg font-semibold">Pahami Dampaknya</div>
-            <p className="text-gray-600 mt-2 text-sm">Lihat tren, temukan sumber emisi terbesar, dan coba kebiasaan yang lebih ramah lingkungan.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="container mt-16 mb-20 text-center">
-        <div className="p-10 rounded-lg bg-green-50 border">
-          <h3 className="text-2xl font-semibold">Sudah siap mengenal jejak karbonmu?</h3>
-          <p className="mt-3 text-gray-600">Mulai dari langkah kecil dengan memahami dampak dari aktivitas sehari-harimu.</p>
-          <div className="mt-6 flex justify-center">
-            <Button to="/dashboard">Mulai Sekarang</Button>
-          </div>
-        </div>
-      </section>
+      <section id="jelajahi" className="container py-24 sm:py-36"><div className="grid gap-12 lg:grid-cols-[1fr_0.8fr] lg:items-end"><div><p className="eyebrow">01 / Sebuah kesadaran</p><h2 className="display-serif mt-5 max-w-3xl text-5xl leading-[0.98] tracking-[-0.035em] text-ink sm:text-7xl">Setiap perjalanan.<br />Setiap makanan.<br /><em className="text-primary-600">Setiap jejak.</em></h2></div><div className="max-w-sm lg:pb-2"><p className="text-lg leading-8 text-ink-muted">Apa yang kita kendarai, nyalakan, makan, dan beli meninggalkan cerita. Carbon footprint membuat cerita itu terlihat, supaya perubahan terasa mungkin.</p><Link to="/aktivitas" className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-primary-700">Mulai dari kebiasaanmu <MoveUpRight size={16} /></Link></div></div><div className="mt-16 grid gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-center"><div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-primary-100 sm:aspect-[1.2/1]"><img src="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1200&q=85" alt="Daun hijau terkena cahaya matahari" className="h-full w-full object-cover" /><div className="absolute bottom-5 left-5 flex items-center gap-3 bg-surface px-4 py-3 text-sm font-semibold text-ink shadow-lg"><Leaf size={17} className="text-primary-600" /> Lebih sadar, bukan lebih sempurna</div></div><div className="lg:pl-14"><p className="max-w-md text-3xl font-semibold leading-tight text-ink sm:text-4xl">Data yang baik bukan untuk membuatmu merasa bersalah.</p><p className="mt-5 max-w-md leading-7 text-ink-muted">BumiLestari memberi konteks pada aktivitas harianmu, lalu membantu menemukan satu langkah berikutnya yang paling relevan.</p><div className="mt-9 border-t border-primary-100 pt-5 text-sm text-ink-muted"><span className="font-bold text-terracotta">Catatan editor</span><span className="ml-3">Dampak personal dimulai dari perhatian sehari-hari.</span></div></div></div></section>
+      <section id="dampak" className="bg-[#f0ede5] py-24 sm:py-32"><div className="container"><div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end"><div><p className="eyebrow">02 / Peta dampak</p><h2 className="mt-4 max-w-xl text-4xl font-bold leading-tight tracking-[-0.035em] text-ink sm:text-6xl">Dari mana dampakmu datang?</h2></div><p className="max-w-xs leading-7 text-ink-muted">Tidak semua bagian hidup punya bobot yang sama. Lihat yang paling berarti untukmu.</p></div><div className="mt-14 grid auto-rows-[190px] gap-3 sm:grid-cols-2 md:grid-cols-4">{impactAreas.map((area, index) => <article key={area.title} className={`group relative overflow-hidden p-6 transition-colors duration-500 ${area.className} ${index === 0 ? 'text-ink' : ''}`}>{area.image && <img src={area.image} alt="Jalur transportasi di alam" className="absolute inset-0 h-full w-full object-cover mix-blend-multiply opacity-60 transition duration-700 group-hover:scale-[1.02] group-hover:opacity-70" />}<div className="relative flex h-full flex-col justify-between"><div className="flex justify-between text-xs font-bold tracking-[0.16em]"><span>{area.number}</span><ChevronRight size={16} className="opacity-60 transition group-hover:translate-x-1" /></div><div><h3 className="text-2xl font-bold transition-transform duration-300 group-hover:translate-x-1">{area.title}</h3><p className="mt-1 text-sm opacity-70">{area.detail}</p></div></div></article>)}</div></div></section>
+      <section id="jejak" className="container py-24 sm:py-36"><div className="grid gap-14 lg:grid-cols-[0.75fr_1.25fr] lg:items-center"><div><p className="eyebrow">03 / Angka yang bercerita</p><h2 className="display-serif mt-5 max-w-md text-5xl leading-none tracking-[-0.035em] text-ink sm:text-7xl">Seberapa besar jejak yang kamu tinggalkan?</h2><p className="mt-6 max-w-sm leading-7 text-ink-muted">Satu ringkasan yang jernih untuk membantumu melihat arah, bukan sekadar skor.</p><Button to="/dashboard" className="mt-8">Mulai menghitung <ArrowRight size={17} /></Button></div><div className="relative bg-primary-700 p-5 text-white shadow-2xl shadow-primary-700/15 sm:p-9"><div className="relative flex items-start justify-between border-b border-white/20 pb-7"><div><p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/60">Total bulan ini</p><p className="display-serif mt-2 text-6xl">2.4 <span className="font-sans text-base text-white/60">t CO₂e</span></p></div><span className="mt-2 flex items-center gap-1 text-sm font-bold text-[#dbe8d2]"><TrendingDown size={16} /> 12% <span className="font-normal text-white/50">vs bulan lalu</span></span></div><div className="grid gap-7 py-8 sm:grid-cols-[1fr_0.8fr] sm:items-center"><div className="relative mx-auto flex h-48 w-48 items-center justify-center rounded-full border-[14px] border-[#71886a] border-r-[#e6c3a7] border-t-[#e6c3a7]"><div className="text-center"><p className="text-3xl font-bold">68%</p><p className="mt-1 text-xs text-white/60">target tercapai</p></div></div><div className="space-y-4 text-sm">{[['Transport', '38%', 'bg-[#e6c3a7]'], ['Energy', '27%', 'bg-[#a9b99d]'], ['Food', '21%', 'bg-[#d5c19f]'], ['Lifestyle', '14%', 'bg-[#71886a]']].map(([label, value, color]) => <div key={label} className="flex items-center gap-3"><span className={`h-2.5 w-2.5 ${color}`} /><span className="flex-1 text-white/70">{label}</span><span className="font-bold">{value}</span></div>)}</div></div><div className="flex items-center gap-2 border-t border-white/20 pt-5 text-sm text-white/70"><Sparkles size={16} className="text-[#e6c3a7]" /> Peluang terbesarmu ada di transportasi.</div></div></div></section>
+      <section className="border-y border-primary-100 bg-primary-50/50 py-24 sm:py-32"><div className="container"><div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr]"><div><p className="eyebrow">04 / Ritme perubahan</p><h2 className="mt-5 max-w-sm text-4xl font-bold leading-tight tracking-[-0.035em] text-ink sm:text-5xl">Perubahan besar dimulai dari kebiasaan kecil.</h2></div><div className="grid gap-10 sm:grid-cols-3">{steps.map((step) => <article key={step.number} className="border-t border-primary-600 pt-5"><p className="display-serif text-5xl text-terracotta">{step.number}</p><h3 className="mt-8 text-xl font-bold text-ink">{step.title}</h3><p className="mt-3 leading-7 text-ink-muted">{step.text}</p></article>)}</div></div><div className="mt-20 grid gap-4 sm:grid-cols-[1.2fr_0.8fr]"><div className="relative min-h-[280px] overflow-hidden bg-primary-100"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=85" alt="Teman-teman berjalan bersama di alam" className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-0 bg-black/30" /><p className="absolute bottom-6 left-6 max-w-xs text-2xl font-semibold leading-tight text-white">Tidak perlu mengubah semuanya untuk mulai bergerak.</p></div><div className="flex flex-col justify-between bg-[#e6c3a7] p-7 text-primary-700"><Waves size={23} /><p className="mt-10 text-2xl font-bold leading-tight">Satu pilihan yang lebih sadar, setiap hari.</p><Link to="/analisis" className="mt-8 inline-flex items-center gap-2 text-sm font-bold">Lihat insight-mu <ArrowRight size={16} /></Link></div></div></div></section>
+      <section id="tips" className="container py-24 sm:py-32"><div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end"><div><p className="eyebrow">05 / Untuk hari ini</p><h2 className="display-serif mt-5 max-w-xl text-5xl leading-[0.98] tracking-[-0.035em] text-ink sm:text-7xl">Buat satu pilihan yang lebih ringan.</h2></div><Link to="/simulasi" className="group flex max-w-sm items-center justify-between border-b border-primary-100 pb-4 text-lg font-semibold text-ink"><span>Jelajahi aksi ramah bumi</span><span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-50 text-primary-600 transition group-hover:bg-primary-600 group-hover:text-white"><ArrowRight size={17} /></span></Link></div><div className="mt-16 grid gap-3 sm:grid-cols-4">{['Beralih ke transportasi umum', 'Kurangi penggunaan listrik', 'Pilih makanan berdampak rendah', 'Kurangi konsumsi sekali pakai'].map((tip, index) => <div key={tip} className="group relative min-h-[210px] border-t border-primary-600 px-1 pt-5 transition-colors hover:bg-[#f4eee4]"><span className="text-xs font-bold text-terracotta transition-colors group-hover:text-primary-600">0{index + 1}</span><h3 className="mt-20 max-w-[180px] text-xl font-bold leading-tight text-ink transition-transform duration-300 group-hover:translate-x-1">{tip}</h3></div>)}</div></section>
+      <section className="relative overflow-hidden bg-primary-700 py-28 text-white sm:py-36"><img src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1800&q=80" alt="Hutan dengan cahaya pagi" className="absolute inset-0 h-full w-full object-cover opacity-25" /><div className="container relative"><p className="eyebrow !text-[#e6c3a7]">Satu langkah kecil</p><h2 className="display-serif mt-5 max-w-3xl text-6xl leading-[0.9] tracking-[-0.04em] sm:text-8xl">Mulai dari sini.</h2><p className="mt-8 max-w-md text-lg leading-8 text-white/70">Kenali jejak karbonmu dan temukan cara sederhana untuk membuatnya lebih ringan.</p><Button to="/dashboard" className="mt-9 bg-[#e6c3a7] text-primary-700 hover:bg-white">Hitung Jejak Karbon <ArrowRight size={17} /></Button></div></section>
     </div>
   )
 }

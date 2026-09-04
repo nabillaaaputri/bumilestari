@@ -30,48 +30,48 @@ export default function ActivitySummary() {
   const largestEmitter = topEmitters[0]
 
   return (
-    <div className="grid gap-4 sm:grid-cols-3">
+    <div className="grid gap-x-8 border-y border-primary-100 sm:grid-cols-3">
       {/* Total Activities */}
-      <div className="p-4 rounded-lg border bg-white">
+      <div className="py-5">
         <div className="flex items-start justify-between">
           <div>
-            <p className="text-sm text-gray-600">Total Aktivitas</p>
-            <p className="mt-2 text-2xl font-semibold text-gray-800">
+            <p className="dashboard-label">Total Aktivitas</p>
+            <p className="mt-2 text-3xl font-bold text-ink">
               {activities.length}
             </p>
           </div>
-          <div className="p-2 rounded-lg bg-blue-50">
-            <AlertCircle className="text-blue-600" size={20} />
+          <div>
+            <AlertCircle className="text-primary-600" size={18} />
           </div>
         </div>
       </div>
 
       {/* Total Emisi */}
-      <div className="p-4 rounded-lg border bg-white">
+      <div className="py-5">
         <div className="flex items-start justify-between">
           <div>
-            <p className="text-sm text-gray-600">Total Emisi Karbon</p>
-            <p className="mt-2 text-2xl font-semibold text-green-700">
+            <p className="dashboard-label">Total Emisi Karbon</p>
+            <p className="mt-2 text-3xl font-bold text-primary-700">
               {formatCarbonEmissionWithAutoUnit(totalEmission)}
             </p>
           </div>
-          <div className="p-2 rounded-lg bg-green-50">
-            <Leaf className="text-green-600" size={20} />
+          <div>
+            <Leaf className="text-primary-600" size={18} />
           </div>
         </div>
       </div>
 
       {/* Emisi Terbesar */}
-      <div className="p-4 rounded-lg border bg-white">
+      <div className="py-5">
         <div className="flex items-start justify-between">
           <div>
-            <p className="text-sm text-gray-600">Emisi Terbesar</p>
+            <p className="dashboard-label">Emisi Terbesar</p>
             {largestEmitter ? (
               <>
-                <p className="mt-2 text-sm font-medium text-gray-800">
+                <p className="mt-2 text-sm font-medium text-ink">
                   {getCategoryIcon(largestEmitter.category)} {largestEmitter.activity}
                 </p>
-                <p className="text-lg font-semibold text-amber-600">
+                <p className="text-lg font-semibold text-terracotta">
                   {formatCarbonEmissionWithAutoUnit(largestEmitter.carbonEmission)}
                 </p>
               </>
@@ -79,8 +79,8 @@ export default function ActivitySummary() {
               <p className="mt-2 text-gray-500 text-sm">-</p>
             )}
           </div>
-          <div className="p-2 rounded-lg bg-amber-50">
-            <TrendingUp className="text-amber-600" size={20} />
+          <div>
+            <TrendingUp className="text-terracotta" size={18} />
           </div>
         </div>
       </div>

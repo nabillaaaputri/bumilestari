@@ -17,7 +17,7 @@ export default function AnalysisSummary({ activities = [] }) {
   const lowestDay = getLowestEmissionDay(activities)
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-x-8 border-y border-primary-100 sm:grid-cols-2 lg:grid-cols-4">
       <SummaryCard
         icon={TrendingUp}
         title="Total Emisi"
